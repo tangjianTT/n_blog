@@ -1,8 +1,7 @@
 <template>
   <div id="main1">
     <!-- Post -->
-    <main-content>
-      <div slot="list">
+      <div>
         <!-- Post -->
         <article class="post" v-for="(item,index) in post" :key="index">
           <header>
@@ -30,7 +29,9 @@
             <ul class="actions">
               <li>
                 <a class="button big" @click="detailClick(item.id)">继续阅读</a>
-                 <div slot="detail" v-if="showDetail" style="color:red">这里是更多内容</div>
+                 <main-content>
+                    <div :slot="item.id" v-show="showDetail.indexOf(item.id)>-1" style="color:red">这里是更多内容</div>
+                 </main-content>
               </li>
             </ul>
             <ul class="stats">
@@ -56,7 +57,6 @@
           </li>
         </ul>
       </div>
-    </main-content>
    
   </div>
 </template>
@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       post: [],
-      showDetail:false,
+      showDetail:[],
     };
   },
   components: {
@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     detailClick(id) {
-      this.showDetail = !this.showDetail;
+      this.showDetail.push(id);
       // this.$router.push("/blog/" + id).catch(err => {
       //   console.log(err);
       // });

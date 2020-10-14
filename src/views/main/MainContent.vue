@@ -1,8 +1,8 @@
 <template>
   <div>
-    <slot name="list">
-      <slot name="detail"></slot>
-    </slot>
+    <slot name="1"></slot>
+    <slot name="2"></slot>
+    <slot name="3"></slot>
   </div>
 </template>
 
