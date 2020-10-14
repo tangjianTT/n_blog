@@ -23,7 +23,6 @@
           <!--  <a href="#" class="image featured">
         <img src="~assets/img/pic01.jpg" alt />
           </a>-->
-
           <!-- <mavon-editor v-model="item.content"></mavon-editor> -->
           <div v-html="item.content" class="content"></div>
 
@@ -31,6 +30,7 @@
             <ul class="actions">
               <li>
                 <a class="button big" @click="detailClick(item.id)">继续阅读</a>
+                 <div slot="detail" v-if="showDetail" style="color:red">这里是更多内容</div>
               </li>
             </ul>
             <ul class="stats">
@@ -57,6 +57,7 @@
         </ul>
       </div>
     </main-content>
+   
   </div>
 </template>
 
@@ -67,7 +68,8 @@ export default {
   name: "Main",
   data() {
     return {
-      post: []
+      post: [],
+      showDetail:false,
     };
   },
   components: {
@@ -75,9 +77,10 @@ export default {
   },
   methods: {
     detailClick(id) {
-      this.$router.push("/blog/" + id).catch(err => {
-        console.log(err);
-      });
+      this.showDetail = !this.showDetail;
+      // this.$router.push("/blog/" + id).catch(err => {
+      //   console.log(err);
+      // });
     }
   },
   mounted() {
